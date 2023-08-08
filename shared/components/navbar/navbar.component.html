@@ -1,0 +1,53 @@
+<mat-toolbar color="primary">
+  <span>SIC - Sistema Integral de Carnicerias</span>
+  <div class="spacer">
+    <button mat-button routerLink="/">Home</button>
+    <ng-container *ngIf="isLogguedIn">
+      <button mat-button [matMenuTriggerFor]="productsMenu">Facturas</button>
+      <mat-menu #productsMenu="matMenu">
+        <button mat-menu-item routerLink="/factura/new">Crear Factura</button>
+        <button mat-menu-item routerLink="/factura">
+          Ver Listado Facturas
+        </button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="factsMenu">NP</button>
+      <mat-menu #factsMenu="matMenu">
+        <button mat-menu-item routerLink="/nota-pedido/new">Crear NP</button>
+        <button mat-menu-item routerLink="/nota-pedido">Ver Listado NP</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="remitoMenu">Remito</button>
+      <mat-menu #remitoMenu="matMenu">
+        <button mat-menu-item routerLink="/remito">Cumplir Remitos</button>
+        <button mat-menu-item routerLink="/remito/listado">
+          Listado Remitos
+        </button>
+      </mat-menu>
+      <button mat-button routerLink="/almacen">Stock</button>
+
+      <button mat-button [matMenuTriggerFor]="clientesMenu">Clientes</button>
+      <mat-menu #clientesMenu="matMenu">
+        <button mat-menu-item routerLink="/cliente">Listado Clientes</button>
+        <button mat-menu-item routerLink="/cliente">Editar Cliente</button>
+      </mat-menu>
+      <button mat-button routerLink="/proveedores">Proveedores</button>
+
+      <button mat-button [matMenuTriggerFor]="ocMenu">Orden de Compra</button>
+      <mat-menu #ocMenu="matMenu">
+        <button mat-menu-item routerLink="/orden-compra/new">
+          Crear orden de compra
+        </button>
+        <button mat-menu-item routerLink="/orden-compra/confirmar">
+          Confirmar orden de compra
+        </button>
+        <button mat-menu-item routerLink="/orden-compra">
+          Listado orden de compra
+        </button>
+      </mat-menu>
+      <button mat-button routerLink="/reportes">Reportes</button>
+      <button mat-button (click)="logout()">Salir</button>
+    </ng-container>
+    <button *ngIf="!isLogguedIn" mat-button routerLink="/login">
+      Iniciar Sesion
+    </button>
+  </div>
+</mat-toolbar>

@@ -1,0 +1,36 @@
+<mat-form-field class="search-bar">
+  <input
+    matInput
+    [formControl]="searchControl"
+    (keyup.enter)="search()"
+    placeholder="Filtrar por nombre"
+  />
+</mat-form-field>
+<button mat-button color="primary" class="botonBusqueda" (click)="search()">
+  Buscar
+</button>
+<table mat-table [dataSource]="filteredData" class="mat-elevation-z8">
+  <!-- Define Columns -->
+  <ng-container *ngFor="let header of headers" [matColumnDef]="header">
+    <th mat-header-cell *matHeaderCellDef>{{ header }}</th>
+    <td mat-cell *matCellDef="let element">{{ element[header] || "-" }}</td>
+  </ng-container>
+
+  Define Actions Column
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let row">
+      <button
+        *ngFor="let action of actions"
+        mat-button
+        [appConfirm]="action.name"
+        (confirm)="actionClicked(action.name, row)"
+      >
+        {{ action.label }}
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
